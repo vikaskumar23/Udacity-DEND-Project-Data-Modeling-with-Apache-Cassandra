@@ -13,39 +13,41 @@ The analytics Team wants to execute below three queries on database.
 
 ## Create table query and Description of Partition key and Clustering Key for each query
 **Query 1**:
-	```
-	query = "CREATE TABLE IF NOT EXISTS songs "
-	query = query + "(sessionId int, itemInSession int, artist text, song text, length decimal, PRIMARY KEY (sessionId, itemInSession))"
-	session.execute(query)
-	```
-	**Query Description**
+```
+query = "CREATE TABLE IF NOT EXISTS songs "
+query = query + "(sessionId int, itemInSession int, artist text, song text, length decimal, PRIMARY KEY (sessionId, itemInSession))"
+session.execute(query)
+```
+	
+**Query Description**
 >	For this query Primary Key, sessionId is used as partion key and itemInSession is used as clustering key. This allows Data partitioning by sessionId and clustering by itemInSession which helps in fast retrieval of data for a specific sessionId.
 
 **Query 2**:
-	```
-	query = "CREATE TABLE IF NOT EXISTS songplay_songdata "
-	query = query + "(userId int, sessionId int, artist text, song text, first_name text, last_name text, itemInSession int, PRIMARY KEY ((userId, sessionId), itemInSession))"
-	session.execute(query)
-	```
-	**Query Description**
+```
+query = "CREATE TABLE IF NOT EXISTS songplay_songdata "
+query = query + "(userId int, sessionId int, artist text, song text, first_name text, last_name text, itemInSession int, PRIMARY KEY ((userId, sessionId), itemInSession))"
+session.execute(query)
+```
+	
+**Query Description**
 > For this query Primary Key, userid is used as partition key and sessionId is used as clustering key. Due to this data is partitioned by userId and clustered by sessionId. This helps in fast retrieval of data for specific userId. And data is clustered by sessionId so it returns data sorted by sessionId.
 	
 **Query 3**:
-	```
-	query = "CREATE TABLE IF NOT EXISTS songplay_songdata "
-	query = query + "(userId int, sessionId int, artist text, song text, first_name text, last_name text, itemInSession int, PRIMARY KEY ((userId, sessionId), itemInSession))"
-	session.execute(query)
-	```
-	**Query Description**
+```
+query = "CREATE TABLE IF NOT EXISTS songplay_songdata "
+query = query + "(userId int, sessionId int, artist text, song text, first_name text, last_name text, itemInSession int, PRIMARY KEY ((userId, sessionId), itemInSession))"
+session.execute(query)
+```
+	
+**Query Description**
 > For this query query Primary Key, song name is selected as partion key which allows easy retrieval of data for specific song name, but this only can't identify data uniquely in table. So user_id is used as clustering key, as user id is unique for every user. This makes each row unique and all data for specific song name can easily fetched from database.
 
 ## Dataset Required for Project
 For this project, we'll be working with one dataset: ```event_data```. The directory of CSV files partitioned by date. Here are examples of filepaths to two files in the dataset:
-
-    ```
+```
 	event_data/2018-11-08-events.csv
 	event_data/2018-11-09-events.csv
-    ```
+```
 
 ## Project Execution
 Just run the queries in notebook one by one. Make sure the keyspace is created and set before executing Create table queries.
